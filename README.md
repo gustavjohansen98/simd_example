@@ -14,4 +14,4 @@ gcc -mavx2 simd.c -o fuck_this_shit
 
 ## Comparison
 
-![alt text](./time_comparrison.png "SIMD vs. Scalar")
+![alt text](./time_comparrison.png "SIMD vs. Scalar" | width=100)
