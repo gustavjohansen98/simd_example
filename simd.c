@@ -1,4 +1,4 @@
-/* Program to demonstrate SIMD vectorial computations vs normal scalar */
+/* Program to demonstrate SIMD vectorial processing vs scalar processing */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -15,17 +15,18 @@ int add_AVX(int size, int *a, int *b)
     int i = 0;
     for (; i + 8 <= size; i += 8) 
     {
-        // load 256-bit chunks of each array
+        // load 256-bit chunks of each array from memory (8 elements)
         __m256i first_values = _mm256_loadu_si256((__m256i*) &a[i]);
         __m256i second_values = _mm256_loadu_si256((__m256i*) &b[i]);
 
-        // add each pair of 32-bit integers in the 256-bit chunks
+        // add each pair of 32-bit integers from the respective 256-bit chunks
+        // and store the 8 results in the first ymm register  
         first_values = _mm256_add_epi32(first_values, second_values);
         
-        // store 256-bit chunk to first array
+        // store the computed 8 elements in the array a in memory
         _mm256_storeu_si256((__m256i*) &a[i], first_values);
     }
-    // handle left overs
+    // pick up left overs (since we increment with 8 for each iteration)
     for (; i < size; ++i) a[i] += b[i];
 }
 
