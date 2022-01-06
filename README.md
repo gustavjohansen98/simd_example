@@ -3,13 +3,13 @@
 ### Compile 
 
 ```bash 
-gcc -mavx2 simd.c -o fuck_this_shit
+gcc -mavx2 simd.c -o runner
 ```
 
 ### Run
 
 ```bash
-./fuck_this_shit <array size>
+./runner <array size>
 ```
 
 ## Comparison
